@@ -1,0 +1,3 @@
+﻿Riddle: Normal gåde 1 Answer: test1
+Riddle: Normal gåde 2 Answer: test2
+Riddle: Normal gåde 3 Answer: test3

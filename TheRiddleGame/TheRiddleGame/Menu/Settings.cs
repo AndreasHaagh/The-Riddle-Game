@@ -8,7 +8,7 @@ namespace TheRiddleGame
 {
     class Settings : IMenu
     {
-        private string[] settingsOptions = new string[] { "Difficulty", "Custom Difficulty", "Color", "Back" };
+        private string[] settingsOptions = new string[] { "Difficulty", "Color", "Back" };
 
         public void Draw()
         {
@@ -26,10 +26,8 @@ namespace TheRiddleGame
             switch (input.ToLower())
             {
                 case "difficulty":
-                    ChangeDifficulty();
-                    break;
-                case "custom Difficulty":
-                    CreateCustomDifficulty();
+                    input = Console.ReadLine();
+                    ChangeDifficulty(input);
                     break;
                 case "color":
                     Console.WriteLine("Pick one of these colors 'Green', 'Red' or 'Yellow'. Leave it empty to change it back to 'White'");
@@ -63,16 +61,24 @@ namespace TheRiddleGame
             }
         }
 
-        private void ChangeDifficulty()
+        private void ChangeDifficulty(string difficulty)
         {
-            Console.WriteLine("Changing the difficulty (Work in progress)");
-            Console.ReadKey();
-        }
-
-        private void CreateCustomDifficulty()
-        {
-            Console.WriteLine("Changing the difficulty to using custom (Work in progress)");
-            Console.ReadKey();
+            Game game = new Game();
+            if (difficulty == "Easy")
+            {
+                game.fileName = "EasyRiddles.txt";
+                game.time = 40;
+            }
+            else if (difficulty == "Hard")
+            {
+                game.fileName = "HardRiddles.txt";
+                game.time = 80;
+            }
+            else
+            {
+                game.fileName = "NormalRiddles.txt";
+                game.time = 60;
+            }
         }
     }
 }

@@ -36,6 +36,11 @@ namespace TheRiddleGame
                     Console.Clear();
                     game.StartGame();
                     break;
+                case "tutorial":
+                    Tutorial tutorial = new Tutorial();
+                    Console.Clear();
+                    tutorial.StartTutorial();
+                    break;
                 case "high score":
                     break;
                 case "settings":
@@ -44,11 +49,12 @@ namespace TheRiddleGame
                     settings.TakeInput();
                     break;
                 case "credits":
+                    Console.Clear();
+                    Console.WriteLine("Made by Andreas Flyvholm Haagh \n" + "press any key to get back the menu");
+                    Console.ReadKey();
                     break;
                 case "end":
                     Program.end = true;
-                    break;
-                default:
                     break;
             }
         }
