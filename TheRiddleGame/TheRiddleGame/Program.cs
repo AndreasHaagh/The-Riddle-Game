@@ -11,8 +11,7 @@ namespace TheRiddleGame
         public static bool end = false;
         static void Main(string[] args)
         {
-            string[] startOptions = new string[] { "Play", "Tutorial", "High Score", "Settings", "Credits", "End" };
-            StartMenu startMenu = new StartMenu(startOptions);
+            StartMenu startMenu = new StartMenu();
             while (end == false)
             {
                 startMenu.Draw();

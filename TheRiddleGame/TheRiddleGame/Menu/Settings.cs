@@ -37,8 +37,6 @@ namespace TheRiddleGame
                 case "back":
                     Console.WriteLine("Going back");
                     break;
-                default:
-                    break;
             }
         }
 
@@ -61,6 +59,10 @@ namespace TheRiddleGame
             }
         }
 
+        /// <summary>
+        /// Changes the difficulty of the gamne
+        /// </summary>
+        /// <param name="difficulty"></param>
         private void ChangeDifficulty(string difficulty)
         {
             Game game = new Game();

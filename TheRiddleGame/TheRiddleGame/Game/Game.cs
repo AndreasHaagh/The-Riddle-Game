@@ -9,12 +9,17 @@ namespace TheRiddleGame
 {
     class Game : Riddle
     {
-        public static bool runGame;
-        static string input;
+        private static int score;
+        private static string input;
+        private static bool runGame;
+
+        //These variables are set to follow the normal difficulty, but it can be change the settings.
         public string fileName = "NormalRiddles.txt";
-        public static int score;
-        public int time = 10;
+        public int time = 60;
         
+        /// <summary>
+        /// Starts the game and keep it runnning until the timer hits 0
+        /// </summary>
         public void StartGame()
         {
             MyTimer timer = new MyTimer(time, TimeHandler);
@@ -23,31 +28,41 @@ namespace TheRiddleGame
             runGame = true;
             GetRiddle(fileName);
             timer.StartTimer();
-            Console.WriteLine("The game has started. Start typing like it was your last day on earth!");
+
             while (runGame)
             {
                 Console.WriteLine(riddleString);
                 input = Console.ReadLine();
-                score = CheckGuess(answerString, input, fileName, score);
+                score = CheckGuess(input, fileName, score);
                 Console.Clear();
             }
-            
-        }
 
-        public static void TimeHandler() //virker ikke helt som det skal
-        {
-            Console.Clear();
-            Console.WriteLine("Time's up. your score is {0}. Type 'Save' if you wanna save the score to high score, else press enter to continue", score);
-            input = Console.ReadLine();
             if (input.ToLower() == "save")
             {
-                Console.WriteLine("Please enter your name");
-                string name = Console.ReadLine();
-                string savedScore = name + ": " + score;
-                StreamWriter sw = new StreamWriter("HighScore.txt", true);
-                sw.Write(savedScore);
-                Console.ReadKey();
+                WriteHighScore();
             }
+        }
+
+        /// <summary>
+        /// A handler that stops the game when the timer callback is called in the MyTimer class
+        /// </summary>
+        public static void TimeHandler()
+        {
+            runGame = false;
+            Console.Clear();
+            Console.WriteLine("Time's up. your score is {0}. Type 'Save' if you wanna save the score to high score, else press enter to continue", score);
+        }
+
+        /// <summary>
+        /// Write the score to a text file for later to show the High score
+        /// </summary>
+        private static void WriteHighScore()
+        {
+            Console.Clear();
+            Console.WriteLine("Please enter your name");
+            string name = Console.ReadLine();
+            string savedScore = name + ": " + score + "\n";
+            File.AppendAllText("HighScore.txt", savedScore);
         }
     }
 }

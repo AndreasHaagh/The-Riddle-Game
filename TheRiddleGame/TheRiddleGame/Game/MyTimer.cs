@@ -20,10 +20,15 @@ namespace TheRiddleGame
             this.callback = callback;
         }
 
+        /// <summary>
+        /// Starts the timer. When it hits 0 it 
+        /// </summary>
         public void StartTimer()
         {
             time = startTime;
-            Console.WriteLine("timer has started with {0} seconds", time);
+            Console.WriteLine("The game has started you have {0} seconds to guess as many riddles as posible", time);
+
+            //I'm using a lamda expression to create an anonymous function for the thread
             Task timer = new Task(() =>
             {
                 while (time >= 0)
@@ -31,7 +36,6 @@ namespace TheRiddleGame
                     Thread.Sleep(1000);
                     if (time <= 0)
                     {
-                        Game.runGame = false;
                         callback();
                     }
                     time = time - 1;

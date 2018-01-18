@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,20 +9,15 @@ namespace TheRiddleGame
 {
     class StartMenu : IMenu
     {
-        private string[] options = new string[] { };
-
-        public StartMenu(string[] options)
-        {
-            this.options = options;
-        }
+        private string[] startOptions = new string[] { "Play", "Tutorial", "High Score", "Settings", "Credits", "End" };
 
         public void Draw()
         {
             Console.Clear();
             Console.WriteLine("Type any of these commands below");
-            for (int i = 0; i < options.Length; i++)
+            for (int i = 0; i < startOptions.Length; i++)
             {
-                Console.WriteLine("> " + options[i]);
+                Console.WriteLine("> " + startOptions[i]);
             }
         }
 
@@ -32,16 +28,17 @@ namespace TheRiddleGame
             switch (input.ToLower())
             {
                 case "play":
-                    Game game = new Game();
                     Console.Clear();
+                    Game game = new Game();
                     game.StartGame();
                     break;
                 case "tutorial":
-                    Tutorial tutorial = new Tutorial();
                     Console.Clear();
+                    Tutorial tutorial = new Tutorial();
                     tutorial.StartTutorial();
                     break;
                 case "high score":
+                    ShowHighScore();
                     break;
                 case "settings":
                     Settings settings = new Settings();
@@ -57,6 +54,34 @@ namespace TheRiddleGame
                     Program.end = true;
                     break;
             }
+        }
+
+        /// <summary>
+        /// If the HighScore exists store all line in an array.
+        /// Then sort it after descending by spliting each string in the array, 
+        /// using the second half of the string and parse it to int(the score)
+        /// </summary>
+        private void ShowHighScore()
+        {
+            if (File.Exists("HighScore.txt"))
+            {
+                Console.Clear();
+                Console.WriteLine("High score \n \n" + "Name: Score \n");
+                string[] nameScore = File.ReadAllLines("HighScore.txt").ToArray();
+                var orderedScore = nameScore.OrderByDescending(x => int.Parse(x.Split(':')[1]));
+
+                foreach (string score in orderedScore)
+                {
+                    Console.WriteLine(score);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No scores registered");
+            }
+            
+            Console.WriteLine("Press enter to continue");
+            Console.ReadKey();
         }
     }
 }
