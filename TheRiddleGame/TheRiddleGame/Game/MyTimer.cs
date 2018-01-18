@@ -21,7 +21,7 @@ namespace TheRiddleGame
         }
 
         /// <summary>
-        /// Starts the timer. When it hits 0 it 
+        /// Starts the timer. When it hits 0 it uses a callback to end the game
         /// </summary>
         public void StartTimer()
         {
@@ -34,6 +34,11 @@ namespace TheRiddleGame
                 while (time >= 0)
                 {
                     Thread.Sleep(1000);
+                    if ((time == time / 2) || (time == 15) || (time == 10) || (time == 5))
+                    {
+                        Console.WriteLine(" You have {0} seconds left", time);
+                    }
+
                     if (time <= 0)
                     {
                         callback();

@@ -57,13 +57,13 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EasyRiddles.txt">
+    <Content Include="Riddle_text_files\EasyRiddles.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="HardRiddles.txt">
+    <Content Include="Riddle_text_files\HardRiddles.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NormalRiddles.txt">
+    <Content Include="Riddle_text_files\NormalRiddles.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

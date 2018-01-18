@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TheRiddleGame
@@ -13,15 +14,21 @@ namespace TheRiddleGame
         private static string input;
         private static bool runGame;
 
-        //These variables are set to follow the normal difficulty, but it can be change the settings.
-        public string fileName = "NormalRiddles.txt";
-        public int time = 60;
+        public static string fileName;
+        public static int time;
         
         /// <summary>
-        /// Starts the game and keep it runnning until the timer hits 0
+        /// Starts the game and keep it runnning until the timer hits 0.
+        /// If fileName is empty set normal difficulty
         /// </summary>
         public void StartGame()
         {
+            if (fileName == null)
+            {
+                fileName = "Riddle_text_files/NormalRiddles.txt";
+                time = 60;
+            }
+
             MyTimer timer = new MyTimer(time, TimeHandler);
 
             score = 0;
@@ -29,12 +36,12 @@ namespace TheRiddleGame
             GetRiddle(fileName);
             timer.StartTimer();
 
+            //To show the first  riddle
+            Console.WriteLine(riddle);
             while (runGame)
             {
-                Console.WriteLine(riddleString);
                 input = Console.ReadLine();
                 score = CheckGuess(input, fileName, score);
-                Console.Clear();
             }
 
             if (input.ToLower() == "save")
@@ -44,13 +51,17 @@ namespace TheRiddleGame
         }
 
         /// <summary>
-        /// A handler that stops the game when the timer callback is called in the MyTimer class
+        /// A handler that stops the game when the timer callback is called in the MyTimer class.
         /// </summary>
         public static void TimeHandler()
         {
             runGame = false;
+
+            Console.WriteLine("Time's up. press enter to continue");
+            Console.ReadKey();
+
             Console.Clear();
-            Console.WriteLine("Time's up. your score is {0}. Type 'Save' if you wanna save the score to high score, else press enter to continue", score);
+            Console.WriteLine("Your score is {0}. Type 'Save' if you wanna save the score to high score, else press enter to continue", score);
         }
 
         /// <summary>

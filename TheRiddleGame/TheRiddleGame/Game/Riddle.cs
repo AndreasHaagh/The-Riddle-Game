@@ -9,7 +9,7 @@ namespace TheRiddleGame
 {
     class Riddle
     {
-        public string riddleString;
+        public string riddle;
         public string answerString;
 
          /// <summary>
@@ -30,7 +30,7 @@ namespace TheRiddleGame
             int riddleTo = line.LastIndexOf("Answer: ");
             int answerFrom = line.IndexOf("Answer: ") + "Answer: ".Length;
 
-            riddleString = line.Substring(riddleFrom, riddleTo - riddleFrom);
+            riddle = line.Substring(riddleFrom, riddleTo - riddleFrom);
             answerString = line.Substring(answerFrom);
         }
 
@@ -45,7 +45,9 @@ namespace TheRiddleGame
         {
             if (guess.ToLower() == answerString)
             {
+                Console.Clear();
                 GetRiddle(riddleFile);
+                Console.WriteLine(riddle);
                 return ++score;
             }
             else

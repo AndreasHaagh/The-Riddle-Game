@@ -12,6 +12,9 @@ namespace TheRiddleGame
         private int controlTuttorial;
         private string input;
 
+        /// <summary>
+        /// starts a tutorial with a random riddle from the EasyRiddle.txt. 
+        /// </summary>
         public void StartTutorial()
         {
             controlTuttorial = 0;
@@ -21,25 +24,21 @@ namespace TheRiddleGame
             Console.WriteLine("If you want to stop the tutorial type 'Stop tutorial'");
             Console.WriteLine("Try and see if you can guess the riddle \n");
 
+            Console.WriteLine(riddle);
             while (controlTuttorial <= 0)
             {
-                Console.WriteLine(riddleString);
                 input = Console.ReadLine();
                 controlTuttorial = CheckGuess(input, fileName, controlTuttorial);
+
                 if (input.ToLower() == "stop tutorial")
                 {
                     controlTuttorial = 2;
                 }
             }
 
-            if (controlTuttorial == 1)
-            {
-                Console.WriteLine("You guess the corect answer and finish the tutorial hurray. \n" + "press enter to continue");
-            }
-            else
-            {
-                Console.WriteLine("You have ended the tutorial. press enter to continue");
-            }
+            //simple way to write if statement.
+            Console.WriteLine(controlTuttorial == 1 ? "You guess the corect answer and finish the tutorial hurray. \n" + "press enter to continue" : "You have ended the tutorial. press enter to continue");
+
             Console.ReadKey();
         }
     }

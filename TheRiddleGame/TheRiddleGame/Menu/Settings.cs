@@ -26,6 +26,8 @@ namespace TheRiddleGame
             switch (input.ToLower())
             {
                 case "difficulty":
+                    Console.WriteLine("You can pick between 'Easy', 'Normal' or 'Hard'");
+                    Console.WriteLine("please note that Normal is the defualt \n");
                     input = Console.ReadLine();
                     ChangeDifficulty(input);
                     break;
@@ -40,6 +42,10 @@ namespace TheRiddleGame
             }
         }
 
+        /// <summary>
+        /// Changes the font color based on input from the player
+        /// </summary>
+        /// <param name="color">string input from the player</param>
         private void ChangeColor(string color)
         {
             switch (color.ToLower())
@@ -65,21 +71,21 @@ namespace TheRiddleGame
         /// <param name="difficulty"></param>
         private void ChangeDifficulty(string difficulty)
         {
-            Game game = new Game();
-            if (difficulty == "Easy")
+            string folder = "Riddle_text_files/";
+            if (difficulty.ToLower() == "easy")
             {
-                game.fileName = "EasyRiddles.txt";
-                game.time = 40;
+                Game.fileName = folder + "EasyRiddles.txt";
+                Game.time = 40;
             }
-            else if (difficulty == "Hard")
+            else if (difficulty.ToLower() == "hard")
             {
-                game.fileName = "HardRiddles.txt";
-                game.time = 80;
+                Game.fileName = folder + "HardRiddles.txt";
+                Game.time = 80;
             }
             else
             {
-                game.fileName = "NormalRiddles.txt";
-                game.time = 60;
+                Game.fileName = folder + "NormalRiddles.txt";
+                Game.time = 60;
             }
         }
     }
