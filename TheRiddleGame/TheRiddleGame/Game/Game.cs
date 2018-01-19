@@ -44,6 +44,9 @@ namespace TheRiddleGame
                 score = CheckGuess(input, fileName, score);
             }
 
+            Console.WriteLine("Your score is {0}. Type 'Save' if you wanna save the score to high score, else press enter to continue", score);
+            input = Console.ReadLine();
+
             if (input.ToLower() == "save")
             {
                 WriteHighScore();
@@ -60,8 +63,6 @@ namespace TheRiddleGame
             Console.Clear();
             Console.WriteLine("Time's up. press enter to continue");
             Console.ReadKey();
-
-            Console.WriteLine("Your score is {0}. Type 'Save' if you wanna save the score to high score, else press enter to continue", score);
         }
 
         /// <summary>
