@@ -34,7 +34,7 @@ namespace TheRiddleGame
                 while (time >= 0)
                 {
                     Thread.Sleep(1000);
-                    if ((time == time / 2) || (time == 15) || (time == 10) || (time == 5))
+                    if ((time == startTime / 2) || (time == 15) || (time == 10) || (time == 5))
                     {
                         Console.WriteLine(" You have {0} seconds left", time);
                     }
