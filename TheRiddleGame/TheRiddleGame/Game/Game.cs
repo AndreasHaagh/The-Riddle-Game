@@ -57,10 +57,10 @@ namespace TheRiddleGame
         {
             runGame = false;
 
+            Console.Clear();
             Console.WriteLine("Time's up. press enter to continue");
             Console.ReadKey();
 
-            Console.Clear();
             Console.WriteLine("Your score is {0}. Type 'Save' if you wanna save the score to high score, else press enter to continue", score);
         }
 
